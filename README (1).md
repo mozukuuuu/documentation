@@ -1,18 +1,21 @@
+---
+sidebar_position: 1
+id: intro
+---
+
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ## Installation
 
-```console
+```
 yarn install
 ```
 
-
-
 ## Local Development
 
-```console
+```
 yarn start
 ```
 
@@ -20,7 +23,7 @@ This command starts a local development server and opens up a browser window. Mo
 
 ## Build
 
-```console
+```
 yarn build
 ```
 
@@ -28,7 +31,7 @@ This command generates static content into the `build` directory and can be serv
 
 ## Deployment
 
-```console
+```
 GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
 

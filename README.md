@@ -1,71 +1,66 @@
----
-sidebar_position: 1
-id: intro
----
+# Connextへようこそ
 
-# Welcome!
+Connextは、ブロックチェーン間の高速で信頼性を最小限に抑えた通信を可能にします。
 
-Connext powers fast, trust-minimized communication between blockchains.
+Connextを使って、次のようなクロスチェーンアプリケーション**（xapps**）を構築することができます。
 
-You can use Connext to build crosschain applications (**xapps**) like:
+* ブロックチェーン間でERC-20トークンを転送するためのブリッジ
+* クロスチェーンDeFiプロトコル
+* クロスチェーンNFTなど
 
-* Bridges to transfer ERC-20 tokens between blockchains
-* Crosschain DeFi protocols
-* Crosschain NFTs and more!
+私たちが目指すのは、そんな世界です。
 
-Our goal is to create a world where:
+1. ユーザーは、自分がどのチェーンやロールアップにいるのかを知る必要はありません（知りたい場合は別ですが）。
+2. 開発者は、多くのチェーン/ロールアップのリソースを同時に利用するアプリケーションを構築することができます。
 
-1. Users never need to know what chain or rollup they're on (unless they want to!)
-2. Developers can build applications that utilize resources from many chains/rollups simultaneously
+### 概要 <a href="#contents" id="contents"></a>
 
-## Contents
+これらのドキュメントは、現在testnetで行われている[Amarokネットワークのアップグレード](https://blog.connext.network/announcing-the-amarok-network-upgrade-5046317860a4?source=collection\_home---4------4-----------------------)後に導入されたインターフェースに特化したものです。旧版のドキュメントをお探しの場合は、上のナビバーでバージョン0.1.xに切り替えてください。
 
-These docs are specifically for the interfaces introduced after our [Amarok network upgrade](https://blog.connext.network/announcing-the-amarok-network-upgrade-5046317860a4?source=collection\_home---4------4-----------------------) which is currently on testnet. If you're looking for our legacy docs, switch to version 0.1.x in the navbar above.
+もしあなたがシステムの開発に貢献することに興味があったり、Amarokネットワークのアップグレードの進行状況に興味があったりするなら、私たちの[コア実装レポの](https://github.com/connext/nxtp/tree/main)メインブランチをチェックしてみてください。
 
-If you're interested in contributing to the development of the system or curious about the ongoing progress of the Amarok network upgrade, check out the main branch of our [core implementation repo](https://github.com/connext/nxtp/tree/main).
+#### モジュール式相互運用性 <a href="#modular-interoperability" id="modular-interoperability"></a>
 
-### Modular Interoperability
+Amarokは、流動性層としてNXTP、メッセージング層としてAMBブリッジ、トランスポート層としてConnextルーターからなるクロスチェーン通信**プロトコルスタックの**概念を導入しています。
 
-Amarok introduces the concept of a crosschain communication **protocol stack** with NXTP as the liquidity layer, AMB bridges as the messaging layer, and Connext routers as the transport layer.
+|      レイヤー      |                            プロトコル／ステークホルダー                           |
+| :------------: | :-----------------------------------------------------------------: |
+|    アプリケーション層   |                        クロスチェーンアプリケーション（Xapps）                       |
+|    流動性レイヤー層    |                                 Nxtp                                |
+| ゲートウェイ/ルーティング層 | <p>Interchain Gateway Protocol <br>(正しいメッセージングプロトコルにルーティングします!)</p> |
+|  メッセージングレイヤー層  |                       Rollup AMB、IBC、XCMP、その他                       |
+|    トランスポート層    |                             Connextルーター                             |
 
-|         Layer         |                          Protocol/Stakeholders                          |
-| :-------------------: | :---------------------------------------------------------------------: |
-|   Application Layer   |                     Crosschain Applications (Xapps)                     |
-|    Liquidity Layer    |                                   Nxtp                                  |
-| Gateway/Routing Layer | Interchain Gateway Protocol (routes to the correct messaging protocol!) |
-|    Messaging Layer    |                       Rollup AMBs, IBC, XCMP, etc                       |
-|    Transport Layer    |                             Connext Routers                             |
+#### 一般化したクロスチェーンメッセージング <a href="#generalized-crosschain-messaging" id="generalized-crosschain-messaging"></a>
 
-### Generalized Crosschain Messaging
+私たちは、ロールアップとサイドチェーンのための既存のAMBを使用してメッセージを中継し、それらを互いに接続するためのコネクターのシステムを使用する暫定的なソリューションで作業しています。このソリューションは、リリースの遅れを最小限に抑えつつ、できるだけ早く完全に楽観的なブリッジに移行することを可能にします。
 
-We are working with a temporary solution that uses existing AMBs for rollups and sidechains to relay messages and a system of Connectors to plug those into one another. This solution will minimize release delays while still allowing us to move toward a fully optimistic bridge as soon as possible.
+同時に、ConnextとAMBの上に構築されたスタックは、可能な限り同じインスタント転送を提供し、_一部の_コールで60分という楽観的なレイテンシウィンドウを使用して、一般化したクロスチェーンオペレーションも可能にしています。
 
-In tandem, the stack built on top of Connext and AMBs provides the same instant transfers where possible and also enables generalized crosschain operations, using an optimistic latency window of 60 minutes for _some_ calls.
+このソリューションの詳細については、こちらの[ブログ記事で](https://blog.connext.network/amarok-amb-update-77f142c22db3)紹介しています。
 
-More information on this solution can be found in this [blog post](https://blog.connext.network/amarok-amb-update-77f142c22db3).
+#### オフチェーンオークションの廃止／シグネチャ依存の解消 <a href="#no-more-offchain-auctioning--signature-dependencies" id="no-more-offchain-auctioning--signature-dependencies"></a>
 
-### No More Offchain Auctioning / Signature Dependencies
+外部証明メカニズムはもはや必要ない。その代わり、ルーターはデスティネーションチェーンに資金を投入し、オリジンチェーンからのデータがメッセージングレイヤーを介してデスティネーションにポートされるのを待つだけで、ユーザーとルーターの両方のトランザクションが有効かどうかを比較できる（そしてルーターは資本を補充することができる）。これにより、コントラクトのみの開発プロセスが可能になり、DevXが大幅に簡素化されます。
 
-An external proof mechanism is no longer needed. Instead, a Router can simply front capital on the destination chain, and then wait for data from the origin chain to be ported over the messaging layer to destination, where both the user and router transactions can be compared for validity (and the router can replenish their capital). This enables contract-only development processes which greatly simplifies devX.
+#### Connextに自分のチェーンを追加するには？
 
-### How do I add my chain to Connext?
+Connextは、新しいチェーンへのオンボーディングに料金を請求しません。 新しいチェーンへのオンボーディングのプロセスについては、「[チェーン・オンボーディング・ガイド](https://www.notion.so/connext/How-can-Connext-Bridge-add-my-Chain-fa8b43cac720467a88b5c94f81804091)」を参照してください。
 
-Connext does not charge any fee to onboard new chains. You can learn about our process for onboarding new chains in our [Chain Onboarding Guide](https://www.notion.so/connext/How-can-Connext-Bridge-add-my-Chain-fa8b43cac720467a88b5c94f81804091)
+#### 料金体系について教えてください。
 
-### What is our Fee model?
+私たちはコネクストを公共財と考えています。したがって、コネクストは、あるネットワークから別のネットワークへのトークンのブリッジングに対してエンドユーザーに課金することはありません。
 
-We consider connext a public good, and thus Connext does not charge end users for bridging tokens from one network to another.
+コネクストのクロスチェーン取引にはいくつかの異なる主体が関与しており、彼らの参加意欲を高めるためにインセンティブがシステムに組み込まれています。他のシステムと同様、インセンティブは主にサービスプロバイダー料金の形で提供されます。
 
-A few different entities are involved in Connext’s cross-chain transactions and incentives are built into the system to motivate their participation. Like other systems, incentives are primarily in the form of service provider fees.
+ルーターと呼ばれる流動性供給者は、流動性提供の報酬としてブリッジされた金額に対して0.05%の手数料を標準的に受け取り、発生した経費を補うためにガスの払い戻しを行います。
 
-Liquidity providers, aka Routers, take a standard 0.05% fee over bridged amounts to reward them for providing liquidity, along with gas refunds to compensate for expenses they incur.
+#### コンセンサスルーティング <a href="#consensus-routing" id="consensus-routing"></a>
 
-### Consensus Routing
+トランザクションを完了するためのルーター間のオフチェーンコンセンサスを実現する。これは最終的にTendermintコンセンサスを使用し、ローンチの第一段階では中央集権的なシーケンサーで開始する予定です。
 
-To achieve offchain consensus between routers for completing transactions. This will eventually use Tendermint consensus and will start with a centralized sequencer in the first phase of launch.
+### 構築する
 
-## Start Building
+あなたのdAppでクロスチェーンインタラクションを始めませんか？Connextのクロスチェーン機能をあなたのプロジェクトに組み込んでみましょう。
 
-Want to get started with crosschain interactions in your dApp? Start building and integrating Connext's cross-chain functionality into your project!
-
-[Get Started](docs/developers/intro/)
+["スタート "する](https://docs.connext.network/developers/intro)
