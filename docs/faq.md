@@ -8,7 +8,7 @@ Amarok公開テストネットの「よくある質問」一覧です。
 
 ### 対応するチェーンは？
 
-最新のリストは[Supported Chains](https://docs.connext.network/basics/chains#supported-chains)見ることができます。
+最新のリストは[Supported Chains](basics/chains.md)見ることができます。
 
 ### どのような資産に対応していますか？
 

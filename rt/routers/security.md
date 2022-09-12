@@ -1,4 +1,8 @@
-# Security
+---
+description: セキュリティ
+---
+
+# セキュリティ
 
 Being mindful of security is an essential part of operating any Web3 infrastructure, and running a Connext Router is no exception. Here are some things to be aware of:
 

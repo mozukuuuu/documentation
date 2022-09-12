@@ -1,4 +1,8 @@
-# Parameters for xcall
+---
+description: のパラメーター
+---
+
+# xcallのパラメーター
 
 This is a reference for builders to understand the different parameters of `xcall`.
 

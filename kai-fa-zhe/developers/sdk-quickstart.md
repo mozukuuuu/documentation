@@ -1,4 +1,8 @@
-# SDK Quickstart
+---
+description: クイックスタート
+---
+
+# SDKクイックスタート
 
 The Connext SDK allows developers to interact with the Connext protocol in standard Node.js or web environments. This quickstart will go through how to build on top of Connext using the TypeScript SDK.
 

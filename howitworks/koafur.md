@@ -1,4 +1,4 @@
-# 概要
+# コアフロー
 
 Connextのネットワークのフローは、スタックの流動性と転送層として[nxtp](https://github.com/connext/nxtp)ルーターを利用しています。一般的なクロスチェーンメッセージングを提供するためにAMBソリューションを構築しており、将来的には本格的な楽観的ブリッジソリューションにアップグレードするために状況を監視し続ける予定です。
 
@@ -6,7 +6,7 @@ Connextのネットワークのフローは、スタックの流動性と転送�
 
 ### コアフロー <a href="#core-flow" id="core-flow"></a>
 
-<figure><img src="../../.gitbook/assets/IMG_2145.JPG" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/IMG_2145.JPG" alt=""><figcaption></figcaption></figure>
 
 Connextを経由するトランザクションは、以下のようなサイクルになります。
 

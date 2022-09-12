@@ -1,4 +1,8 @@
-# Checklist for Running a Router
+---
+description: ルーターを実行するためのチェックリスト
+---
+
+# ルーターを実行するためのチェックリスト
 
 * [Spin up the router](../../docs/routers/spinning-up/) and [configure](../../docs/routers/configuration/) for testnets.
 * [Provide Liquidity](../../docs/routers/providing-liquidity/) and gas fees on testnets.

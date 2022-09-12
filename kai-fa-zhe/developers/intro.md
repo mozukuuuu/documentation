@@ -1,4 +1,8 @@
-# Developer Intro
+---
+description: 開発者
+---
+
+# 開発者
 
 ## Quickstarts
 

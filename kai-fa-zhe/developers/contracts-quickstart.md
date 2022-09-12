@@ -1,4 +1,8 @@
-# Contracts Quickstart
+---
+description: クイックスタート
+---
+
+# Contractsクイックスタート
 
 This quickstart will go through how to write smart contracts in Solidity that interact with Connext's deployed contracts.
 

@@ -1,4 +1,8 @@
-# Sample Queries
+---
+description: サンプル
+---
+
+# サンプル
 
 Below are some sample queries you can use to gather information from the Connext contracts.
 

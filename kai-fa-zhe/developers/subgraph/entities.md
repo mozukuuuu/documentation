@@ -1,4 +1,8 @@
-# Subgraph Entities
+---
+description: 本体
+---
+
+# Subgraph本体
 
 ### Entities
 

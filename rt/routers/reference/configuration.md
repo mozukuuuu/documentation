@@ -1,4 +1,8 @@
-# Configuration
+---
+description: 構成
+---
+
+# 構成
 
 The router is accepts configuration using the config file `config.json` in the root directory of the [docker-compose repo](https://github.com/connext/nxtp-router-docker-compose).
 
