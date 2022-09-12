@@ -1,21 +1,24 @@
-# Supported Chains
+# サポートされているチェーン
 
-At mainnet launch we aim to have chain parity to our current mainnet, supporting all major 17 chains we support right now. During the transitionary period until then, we only support Ethereum Testnet chains.
+メインネットローンチ時には、現在サポートしている主要17チェーンすべてをサポートするチェーンパリティを目指しています。 それまでの移行期間中は、Ethereum Testnetチェーンのみをサポートします。
 
-## Supported Tokens & Deployed Contracts
+### サポートされるトークンおよび導入されるコントラクト <a href="#supported-tokens--deployed-contracts" id="supported-tokens--deployed-contracts"></a>
 
-At mainnet launch we aim to have chain parity to our current mainnet, supporting all tokens (and more!) we currently support. During the transitionary period until then, we only support the $TEST token. Contracts for the $TEST token can be found on our [testing against testnet page](../developers/testing-against-testnet/)
+メインネットの立ち上げ時には、現在サポートしているすべてのトークン（およびそれ以上！）をサポートし、現在のメインネットとチェーンパリティを持つことを目指しています。 それまでの移行期間中は、$TESTトークンのみをサポートしています。TESTトークンのコントラクトは、[testnetに対するテストのページで](https://docs.connext.network/developers/testing-against-testnet)見つけることができます。
 
-## Mainnets
+### メインネット <a href="#mainnets" id="mainnets"></a>
 
-| Chain Name | ChainId | Status |
-| ---------- | ------- | :----: |
-| SOON       | SOON    |  SOON  |
+| チェーン名 | チェーンID | ステータス |
+| ----- | ------ | :---: |
+| 近日公開  | 近日公開   |  近日公開 |
 
-## Testnets
+### テストネット <a href="#testnets" id="testnets"></a>
 
-\| Chain Name | ChainId | Domain ID | Status | |------------------|----------|---------- -|:------------:| | Goerli | 4 | 1735353714 | ✅ | | Opt-Goerli | 5 | 1735356532 | ✅ |
+| チェーン名      | ChainId | ドメインID     | ステータス |
+| ---------- | ------- | ---------- | :---: |
+| Goerli     | 4       | 1735353714 |   ✅   |
+| Opt-Goerli | 5       | 1735356532 |   ✅   |
 
-### How do I add my chain to Connext?
+#### Connextに自分のチェーンを追加するには？
 
-Connext does not charge any fee to onboard new chains. You can learn about our process for onboarding new chains in our [Chain Onboarding Guide](https://www.notion.so/connext/How-can-Connext-Bridge-add-my-Chain-fa8b43cac720467a88b5c94f81804091)
+Connextは、新しいチェーンへのオンボーディングに料金を請求しません。 新しいチェーンへのオンボーディングのプロセスについては、「[チェーンオンボーディングガイド](https://www.notion.so/connext/How-can-Connext-Bridge-add-my-Chain-fa8b43cac720467a88b5c94f81804091)」を参照してください。

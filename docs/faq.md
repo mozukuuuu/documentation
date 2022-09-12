@@ -1,73 +1,76 @@
-# FAQ
+---
+description: よくある質問
+---
 
-This is a list of Frequently Asked Questions for the Amarok public testnet.
+# よくある質問
 
-## What chains are supported?
+Amarok公開テストネットの「よくある質問」一覧です。
 
-An updated list can be found at [Supported Chains](basics/chains/#supported-chains).
+### 対応するチェーンは？
 
-## What assets are supported?
+最新のリストは[Supported Chainsで](https://docs.connext.network/basics/chains#supported-chains)見ることができます。
 
-See the deployed addresses for assets at [Deployed Contract Addresses](developers/testing-against-testnet/#deployed-contract-addresses).
+### どのような資産に対応していますか？
 
-## What do "canonical", "representation", "adopted", and "local" assets mean?
+資産の配備先住所は、[配備先契約住所で](https://docs.connext.network/developers/testing-against-testnet#deployed-contract-addresses)ご確認ください。
 
-![drawing](../img/faq/assets.png)
+### canonical」「representation」「adopted」「local」アセットとはどういう意味ですか？
 
-## How do I find the canonical details of a token?
+<figure><img src="https://docs.connext.network/img/faq/assets.png" alt=""><figcaption></figcaption></figure>
 
-The canonical domainId and tokenId of a token can be found by calling the [`getTokenId`](https://github.com/connext/nxtp/blob/3d0af2251b2d8d244d2617be6fb738c09a571022/packages/deployments/contracts/contracts/core/connext/helpers/TokenRegistry.sol#L176) function of `TokenRegistry`.
+### トークンの正規の詳細を調べるにはどうしたらいいですか？
 
-Example:
+トークンの正規の domainId と tokenId は、`TokenRegistry` の[`getTokenId`](https://github.com/connext/nxtp/blob/3d0af2251b2d8d244d2617be6fb738c09a571022/packages/deployments/contracts/contracts/core/connext/helpers/TokenRegistry.sol#L176)関数を呼び出すことで取得できます。
 
-* The token of interest is TestERC20 (`0x3FFc03F05D1869f493c7dbf913E636C6280e0ff9`) on Rinkeby. We want to figure out its canonical domainId and tokenId.
-* Find the TokenRegistry contract address on Rinkeby from [here](developers/testing-against-testnet/#deployed-contract-addresses).
-*   Call `getTokenId` (this example uses Foundry's `cast` to read from the contract)
+例
 
-    ```bash
-    cast call --chain rinkeby 0x1A3BA482D98CCB858AEacB3B839f952390099cE6 "getTokenId(address)(uint32,bytes32)" "0x3FFc03F05D1869f493c7dbf913E636C6280e0ff9" --rpc-url <rinkeby_rpc_url>
+* 興味のあるトークンは、Rinkeby上のTestERC20`(0x3FFc03F05D1869f493c7dbf913E636C6280e0ff9`) です。そのcanonical domainIdとtokenIdを把握したい。
+* リンケージ上のトークンレジストリの契約アドレスは[こちらから](https://docs.connext.network/developers/testing-against-testnet#deployed-contract-addresses)ご確認ください。
+*   `getTokenIdを`呼び出す（この例ではFoundryの`キャストを`使用してコントラクトから読み取る）
+
+    ```
+    cast call --chain rinkeby 0x1A3BA482D98CCB858AEacB3B839f952390099cE6 "getTokenId(address)(uint32,bytes32)" "0x3FFc03F05D1869f493c7dbf913E636C6280e0ff9" --rpc-url <rinkeby_rpc_url>.
     ```
 
-    Returns:
+    リターンです。
 
-    ```bash
-    3331 # the canonical domainId is Goerli
-    0x00000000000000000000000026fe8a8f86511d678d031a022e48fff41c6a3e3b # the canonical bytes32 tokenId
     ```
-*   To get the address of the canonical token on Goerli, call the `getLocalAddress` function of Goerli's `TokenRegistry`
-
-    ```bash
-    cast call --chain goerli 0x51192fD98635FD32C2bfc0A2F4e362D864A4B8b1 "getLocalAddress(uint32,bytes32)(address)" "3331" "0x00000000000000000000000026fe8a8f86511d678d031a022e48fff41c6a3e3b" --rpc-url <goerli-rpc-url>
+    3331 # 正規の domainId は Goerli0x00000000000026fe8a8f86511d678d031a022e48fff41c6a3e3b # 正規の bytes32 tokenId
     ```
+*   Goerli上の正規のトークンのアドレスを取得するには、Goerliの`TokenRegistryの` `getLocalAddress`関数を呼び出します。
 
-    Returns:
-
-    ```bash
-    0x7ea6eA49B0b0Ae9c5db7907d139D9Cd3439862a1 # the contract address of the canonical TestERC20
+    ```
+    cast call --chain goerli 0x51192fD98635FD32C2bfc0A2F4e362D864A4B8b1 "getLocalAddress(uint32,bytes32)(address)" "3331" "0x00000000000026fe8a8f86511d678d031a022e48fff41c6a3e3b" --rpc-url <goerli-rpc-url>。
     ```
 
-## What if I just want to test the destination-side target function?
+    リターンです。
 
-If there’s no token transfer involved then just set `transactingAssetId: address(0)` and `amount: 0`.
+    ```
+    0x7ea6eA49B0b0Ae9c5db7907d139D9Cd3439862a1 # 正規の TestERC20 のコントラクトアドレスを示す。
+    ```
 
-## Do I need to do anything with the AMB contracts?
+### 目的地側のターゲット関数をテストしたいだけの場合はどうすればいいのでしょうか？
 
-No, you do not need to deploy or even interact with AMB contracts directly.
+トークン転送がない場合は、`transactingAssetId: address(0)` **と** `amount: 0`.を設定するだけです。
 
-## How do I find the different domainIds?
+### AMBの契約に何か必要なものはありますか？
 
-See [Domain IDs](developers/testing-against-testnet/#domain-ids).
+いいえ、AMBの契約を直接展開したり、やり取りしたりする必要はありません。
 
-## Where are the Connext contracts?
+### 異なるdomainIdsを見つけるにはどうすればよいですか？
 
-See [Deployed Contract Addresses](developers/testing-against-testnet/#deployed-contract-addresses).
+[ドメインIDを](https://docs.connext.network/developers/testing-against-testnet#domain-ids)参照してください。
 
-## How do I take my token crosschain?
+### コネクストの契約はどこにある？
 
-There are a few steps to take, so please reach out to us for assistance:
+[展開された契約アドレス](https://docs.connext.network/developers/testing-against-testnet#deployed-contract-addresses)を参照してください。
 
-* The Connext team whitelists your asset (for now, this is required).
-* You transfer some of the assets across the bridge.
-* If the destination asset has the amb flavored asset as the adopted asset (there's no existing pool, no representative asset exists yet), then the Token Registry will deploy a new token and set it as canonical.
+### トークンをクロスチェーンに持ち出すにはどうしたらいいですか？
 
-## Are there size limits to calldata?
+いくつかの手順がありますので、ぜひお声をおかけください。
+
+* Connextチームがあなたのアセットをホワイトリストに登録します。（現時点では必須）
+* 橋の向こうの資産の一部を移管するのです。
+* 移行先のアセットが採用したアセットとamb風味のアセットを持つ場合（既存のプールがない、代表アセットがまだ存在しない）、Token Registryは新しいトークンを展開し、それを正規のものとしてセットします。
+
+### calldataにサイズ制限はありますか？ <a href="#are-there-size-limits-to-calldata" id="are-there-size-limits-to-calldata"></a>

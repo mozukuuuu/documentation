@@ -1,31 +1,31 @@
-# How it works
+# 仕組み
 
-This iteration of Connext's network utilizes [nxtp](https://github.com/connext/nxtp) and routers as the liquidity and transport layers of the stack. We're building an interim AMB solution to provide generalized crosschain messaging, and will continue monitoring the situation in the future to upgrade to a fully fledged optimistic bridge solution. All to achieve Modular Interoperability with crosschain communication.
+Connextのネットワークのこの反復は、スタックの流動性と輸送層として[nxtpと](https://github.com/connext/nxtp)ルータを利用しています。一般化されたクロスチェーンメッセージングを提供するために暫定的なAMBソリューションを構築しており、将来的には本格的な楽観的ブリッジソリューションにアップグレードするために状況を監視し続ける予定です。すべては、クロスチェーン通信によるモジュール相互運用性の実現のために。
 
-## Core Flow
+### コアフロー <a href="#core-flow" id="core-flow"></a>
 
-![connext full flow summary](../../img/developers/connext\_flow.png)
+<figure><img src="../../.gitbook/assets/IMG_2145.JPG" alt=""><figcaption></figcaption></figure>
 
-A transaction flowing through Connext will have the following lifecycle:
+コネクストを経由するトランザクションは、以下のようなライフサイクルになります。
 
-* User will initiate the transaction by calling an `xcall` function on the Connext contract, passing in funds, gas details, arbitrary data, and a target address object (includes chain info).
-  * _Note: `xcall` is meant to mimic solidity's lower level call as best as possible._
-* The Connext contracts will:
-  * If needed, swap the passed in token to the AMB version of the same asset.
-  * Call the AMB contracts with a hash of the transaction details to initiate the 60 minute message latency across chains.
-  * Emit an event with the transaction details.
-* Routers observing the origin chain with funds on the destination chain will:
-  * Simulate the transaction (if this fails, the assumption is that this is a more "expressive" crosschain message that requires authentication and so must go through the AMB: the slow path).
-  * Prepare a signed transaction object using funds on the receiving chain.
-  * Post this object (a "bid") to the auctioneer.
-  * _Note: if the router does not have enough funds for the transfer, they may also provide only part of the transfer's value._
-* The auctioneer will be observing all of the underlying chains. Every X blocks, the auctioneer will collect bids for transactions. The auctioneer will be responsible for selecting the correct router (or routers!) for a given transaction (can be random). The auctioneer will post batches of these bids to a relayer network to submit them to chain.
-* When a given bid is submitted to chain, the contracts will do the following:
-  * Check that there are enough funds available for the transaction.
-  * Swap the router's AMB-flavored funds for the canonical asset of the chain if needed.
-  * Send the swapped funds to the correct target (if it is a contract, this will also execute `calldata` against the target).
-  * Hash the router's params and store a mapping of this hash to the router's address in the contract.
-    * _At this point, the user's transaction has already been completed!_
-* Later, when the slow path message arrives, a heavily batched transaction can be submitted to take all pending hashes received over the AMB and look up whether they have corresponding router addresses in the hash -> router address mapping. If they do, then AMB assets are minted and given to the router.
-  * _Note: if the router gives the incorrect amount of funds to a user or if they execute the wrong calldata, then the router's param hash will not match the hash coming over the AMB and the router will not get reimbursed. This is the core security mechanism that ensures that routers behave correctly._
-  * _Note: Routers will take a 60 minute lockup on their funds when relaying transactions. While this theoretically reduces capital efficiency compared to the existing system, in practice the lack of need to rebalance will mean that routers have more capital available more often regardless._
+* ユーザーは、Connextコントラクトの`xcall`関数を呼び出し、資金、ガスの詳細、任意のデータ、およびターゲットアドレスオブジェクト（チェーン情報を含む）を渡して、取引を開始する。
+  * _注：`xcallは`_solidityの下位コールを可能な限り模倣することを意図しています。
+* コネクストの契約は
+  * 必要に応じて、渡されたトークンを同じアセットのAMBバージョンに交換します。
+  * トランザクションの詳細のハッシュを持つAMBコントラクトを呼び出し、チェーン間で60分のメッセージレイテンシーを開始させる。
+  * トランザクションの詳細を示すイベントを発信する。
+* デスティネーションチェーンに資金があるオリジンチェーンを観測しているルーターは、以下のようになります。
+  * トランザクションをシミュレートする（これが失敗した場合、これは認証を必要とする、より「表現力豊かな」クロスチェーンメッセージであるため、AMBを経由する必要がある：遅いパス）ことが前提である。
+  * 受信チェーン上の資金を使用して署名されたトランザクションオブジェクトを準備する。
+  * このオブジェクト（「入札」）をオークショニアに掲示する。
+  * _注：ルーターに十分な資金がない場合、転送額の一部のみを提供することも可能です。_
+* オークショニアは基礎となるチェーンをすべて観察する。Xブロックごとに、オークショニアは取引の入札を集める。オークショニアは与えられた取引に対して正しいルータ（または複数のルータ！）を選択する責任を負う（ランダムでもよい）。オークショニアはこれらの入札のバッチをリレーヤーネットワークにポストし、チェーンに送信する。
+* ある入札がチェーンに提出されたとき、契約は次のように行われます。
+  * 取引に必要な資金が十分にあることを確認する。
+  * 必要に応じて、ルーターのAMB風味の資金をチェーンの正規の資産と交換する。
+  * スワップした資金を正しいターゲットに送る（コントラクトであれば、ターゲットに対して`calldataも`実行する）。
+  * ルーターのパラメータをハッシュ化し、このハッシュとルーターのアドレスのマッピングをコントラクトに格納します。
+    * _この時点で、ユーザーのトランザクションはすでに完了しています!_
+* その後、スローパスメッセージが届くと、AMBで受け取った保留中のハッシュをすべて取り出し、ハッシュ→ルーターアドレスマッピングで対応するルーターアドレスを持っているかどうかを調べるために、大きくバッチしたトランザクションを送信することができる。もし対応するアドレスがあれば、AMBアセットが鋳造され、ルーターに渡される。
+  * _注意：もしルーターが間違った金額をユーザーに渡したり、間違ったcalldataを実行した場合、ルーターのparamハッシュはAMB経由で送られてくるハッシュと一致せず、ルーターは払い戻しを受けられなくなります。これは、ルーターが正しく動作することを保証するための中核的なセキュリティメカニズムである。_
+  * _注：ルーターは取引中継の際、60分間の資金ロックアップを受けます。これは理論的には既存のシステムと比較して資本効率を低下させるが、実際にはリバランスの必要がないため、ルーターはより多くの資本をより頻繁に利用できることになる。_
