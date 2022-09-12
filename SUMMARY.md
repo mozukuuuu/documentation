@@ -2,13 +2,13 @@
 
 * [Connextへようこそ](README.md)
 
-## 概要
+## Connextはどのように機能しますか？
 
-* [概要](gai-yao/howitworks/README.md)
-  * [コアフロー](gai-yao/howitworks/koafur.md)
-* [サポートされているチェーン](gai-yao/chains.md)
-* [よくある質問](gai-yao/faq.md)
-* [公式リンク](gai-yao/readme.md)
+* [概要](connexthadonoyounishimasuka/howitworks/README.md)
+  * [コアフロー](connexthadonoyounishimasuka/howitworks/koafur.md)
+* [サポートされているチェーン](connexthadonoyounishimasuka/chains.md)
+* [よくある質問](connexthadonoyounishimasuka/faq.md)
+* [公式リンク](connexthadonoyounishimasuka/readme.md)
 
 ## 開発者
 
