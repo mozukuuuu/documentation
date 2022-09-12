@@ -17,7 +17,7 @@ Connextを使って、次のようなクロスチェーンアプリケーショ�
 
 これらのドキュメントは、現在testnetで行われている[Amarokネットワークのアップグレード](https://blog.connext.network/announcing-the-amarok-network-upgrade-5046317860a4?source=collection\_home---4------4-----------------------)後に導入されたインターフェースに特化したものです。旧版のドキュメントをお探しの場合は、上のナビバーでバージョン0.1.xに切り替えてください。
 
-もしあなたがシステムの開発に貢献することに興味があったり、Amarokネットワークのアップグレードの進行状況に興味があったりするなら、私たちの[コア実装レポの](https://github.com/connext/nxtp/tree/main)メインブランチをチェックしてみてください。
+もしあなたがシステムの開発に貢献することに興味があったり、Amarokネットワークのアップグレードの進行状況に興味があったりするなら、私たちの[コア実装レポ](https://github.com/connext/nxtp/tree/main)メインブランチをチェックしてみてください。
 
 #### モジュール式相互運用性 <a href="#modular-interoperability" id="modular-interoperability"></a>
 

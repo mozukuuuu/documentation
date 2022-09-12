@@ -8,11 +8,11 @@ Amarok公開テストネットの「よくある質問」一覧です。
 
 ### 対応するチェーンは？
 
-最新のリストは[Supported Chainsで](https://docs.connext.network/basics/chains#supported-chains)見ることができます。
+最新のリストは[Supported Chains](https://docs.connext.network/basics/chains#supported-chains)見ることができます。
 
 ### どのような資産に対応していますか？
 
-資産の配備先住所は、[配備先契約住所で](https://docs.connext.network/developers/testing-against-testnet#deployed-contract-addresses)ご確認ください。
+資産の住所は、[配備先契約住所](https://docs.connext.network/developers/testing-against-testnet#deployed-contract-addresses)ご確認ください。
 
 ### canonical」「representation」「adopted」「local」アセットとはどういう意味ですか？
 
