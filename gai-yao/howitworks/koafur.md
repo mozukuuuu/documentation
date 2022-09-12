@@ -6,7 +6,7 @@ Connextのネットワークのフローは、スタックの流動性と転送�
 
 ### コアフロー <a href="#core-flow" id="core-flow"></a>
 
-<figure><img src="../.gitbook/assets/IMG_2145.JPG" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/IMG_2145.JPG" alt=""><figcaption></figcaption></figure>
 
 Connextを経由するトランザクションは、以下のようなサイクルになります。
 

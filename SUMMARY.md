@@ -1,11 +1,14 @@
 # Table of contents
 
 * [Connextへようこそ](README.md)
-* [概要](howitworks/README.md)
-  * [コアフロー](howitworks/koafur.md)
-* [サポートされているチェーン](docs/basics/chains.md)
-* [よくある質問](docs/faq.md)
-* [公式リンク](<README (1).md>)
+
+## 概要
+
+* [概要](gai-yao/howitworks/README.md)
+  * [コアフロー](gai-yao/howitworks/koafur.md)
+* [サポートされているチェーン](gai-yao/chains.md)
+* [よくある質問](gai-yao/faq.md)
+* [公式リンク](gai-yao/readme.md)
 
 ## 開発者
 
